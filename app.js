@@ -7,7 +7,8 @@ const Weather_api_key = process.env.WEATHER_API_KEY;
 const port = process.env.PORT || 3001;
 import axios from 'axios';  
 const app = express();
-
+app.use(express.json());
+app.enable("trust proxy");
 
 async function getLocation(ip) {
     console.log(Weather_api_key);
@@ -15,6 +16,7 @@ async function getLocation(ip) {
         const response = await axios.get('http://api.weatherapi.com/v1/ip.json', {
             params: {
                 key: Weather_api_key,
+    
                 q: ip
             }
         });
